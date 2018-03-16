@@ -29,6 +29,44 @@ p.main {
 
 .legend {
   position: absolute;
-  background-color: #fff;
+  right: 0px;
+  left: 1000px;
+  bottom: 0px;
+  background-color: white;
   z-index: 2000;
+}
+
+#label {
+  padding-left: 25px;
+  font-size: 14px;
+  }
+
+#leg1 {
+  width: 20px;
+  height: 20px;
+  background-color: yellow;
+}
+
+#leg2 {
+  width: 20px;
+  height: 20px;
+  background-color: orange;
+}
+
+#leg3 {
+  width: 20px;
+  height: 20px;
+  background-color: red;
+}
+
+#leg4 {
+  width: 20px;
+  height: 20px;
+  background-color: purple;
+}
+
+#leg5 {
+  width: 20px;
+  height: 20px;
+  background-color: black;
 }

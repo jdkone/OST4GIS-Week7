@@ -125,11 +125,18 @@ of the application to report this information.
 
 ===================== */
 
-var dataset = ""
+var dataset = "https://raw.githubusercontent.com/CPLN-692-401/datasets/master/geojson/philadelphia-garbage-collection-boundaries.geojson";
 var featureGroup;
 
 var myStyle = function(feature) {
-  return {};
+        switch (feature.properties.COLLDAY) {
+            case 'MON':   return {color: 'yellow'};
+            case 'TUE': return {color: 'orange'};
+            case 'WED':   return {color: 'red'};
+            case 'THU': return {color: 'purple'};
+            case 'FRI':   return {color: 'black'};
+            default: console.log(feature);
+        }
 };
 
 var showResults = function() {
@@ -145,21 +152,42 @@ var showResults = function() {
   $('#results').show();
 };
 
-
 var eachFeatureFunction = function(layer) {
-  layer.on('click', function (event) {
-    /* =====================
+  layer.on('click', function (feature) {
+    switch (feature.properties.COLLDAY) {
+        case 'MON': $("#day-of-week").text("Monday");
+        break;
+        case 'TUE': $("#day-of-week").text("Tuesday");
+        break;
+        case 'WED': $("#day-of-week").text("Wednesday");
+        break;
+        case 'THU': $("#day-of-week").text("Thursday");
+        break;
+        case 'FRI': $("#day-of-week").text("Friday");
+    }
+  console.log(layer.feature);  
+  });
+};
+/*var eachFeatureFunction = function(layer) {
+  layer.on('click', function (feature) {
+    if(feature.properties.COLLDAY === 'MON') {
+    $('.day-of-week').text('Monday');}
+    else{$('.day-of-week').text('NOT');}
+
+  /* =====================
     The following code will run every time a layer on the map is clicked.
     Check out layer.feature to see some useful data about the layer that
     you can use in your application.
     ===================== */
-    console.log(layer.feature);
-    showResults();
-  });
-};
+  showResults();
+//  });
+//};
+
 
 var myFilter = function(feature) {
-  return true;
+  if(feature.properties.COLLDAY === " ") {
+    return false;}
+    else {return true;}
 };
 
 $(document).ready(function() {

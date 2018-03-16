@@ -39,6 +39,8 @@ How will you represent this data that is about the slides? In slideModel.js,
 write a brief example that shows what the data for one slide might look like.
 Think about how it will be stored and read in Javascript (arrays, objects, etc.).
 
+ex:
+var slide1 = { content: "this is my post.", img: "http://my.img" }
 
 ### Task 3: Write Function Signatures
 
@@ -95,5 +97,3 @@ about the work they do, we should try to apply some of that knowledge.
 In preparation for the midterm, mock out the design of your midterm
 application to whatever level of detail you believe will be helpful as
 you go about writing code for the actual assignment.
-
-

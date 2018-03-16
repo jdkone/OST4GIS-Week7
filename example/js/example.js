@@ -2,7 +2,7 @@
   Global Variables
 ===================== */
 var data;  // for holding data
-var stringFilter = "";
+var stringFilter = ""; //this is how your functions know what was typed into the country filter box
 var selectValue = 'All';
 
 /* =====================
@@ -26,7 +26,7 @@ var tileOpts = {
 var Stamen_TonerLite = L.tileLayer('http://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}.{ext}', tileOpts).addTo(map);
 
 // Ajax to grab json
-var getData = $.ajax('https://raw.githubusercontent.com/CPLN-692-401/datasets/master/json/world-country-capitals.json')
+var getData = $.ajax('https://raw.githubusercontent.com/CPLN-692-401/datasets/master/json/world-country-capitals.json');
 
 /* =====================
   Parse and store data for later use
@@ -36,6 +36,9 @@ var parseData = function(res) {
   var parsedRes = JSON.parse(res);
 
   // Store our (now parsed) data to the global variable `data`
+  //_.chain is used to initiate a chain reaction among functions, so after you use _.chain, you don't need to
+  //continue to use your object in the argument, because each new function will automatically use the output
+  //of the funcion before it. .value() closes the chain and returns your final object
   data = _.chain(parsedRes)
     .map(function(datum) {
 
@@ -66,7 +69,7 @@ var parseData = function(res) {
       var markerArray = _.map(group, function(datum) { return datum.marker; });
       var fitBoundsOptions = { padding: [15, 15] };  // An options object
 
-      return {
+      return { //this is a feature group of each of the continents
         data: group,
         features: L.featureGroup(markerArray)
           .on('click', function() {  // Bind a function onto any click on this `featureGroup`
@@ -119,7 +122,7 @@ var onStringFilterChange = function(e) {
   filterAndPlot();
 };
 
-var onSelectChange = function() {
+var onSelectChange = function(e) {
   selectValue = e.target.value;
   filterAndPlot();
 };
